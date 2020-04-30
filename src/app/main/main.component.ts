@@ -153,8 +153,20 @@ export class MainComponent {
      * currently unused function for making single-die rouse checks
      */
     rouseCheck(): void {
+        var dice_value = this.rollDie()
+
+        //crit fail
+        if (dice_value == 1) {
+            this.rouseImg = 'assets/images/bestial-fail.png';
+            this.rouseText = 'Crit Fail';
+        }
+        //crit success
+        else if (dice_value == 10) {
+            this.rouseImg = 'assets/images/red-crit.png';
+            this.rouseText = 'Crit Success';
+        }
         //fail
-        if (this.rollDie() < 6) {
+        else if (dice_value < 6) {
             this.rouseImg = 'assets/images/red-fail.png';
             this.rouseText = 'Fail';
         }
