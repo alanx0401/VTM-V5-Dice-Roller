@@ -2,60 +2,74 @@
 
     <!--user input fields and title-->
     <div class='container'>
+        <div class="row">
+       
 
         <h2>Vampire: The Masquerade Fifth Edition Online Dice Roller</h2>
-
-        <!--input for full dice pool-->
-        <div class='input-group'>
-            <div class="input-group-prepend">
-                <span class="input-group-text">Dice Pool</span>
+        
+        <!-- original dice roller -->
+        <div class="col-6">
+            <!--input for full dice pool-->
+            <div class='input-group'>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Dice Pool</span>
+                </div>
+                <input type='number' min='1' max='20' class='form-control' id='normal-dice' aria-label='Dice Pool'
+                    style='max-width: 80px;' [(ngModel)]='dice'>
             </div>
-            <input type='number' min='1' max='20' class='form-control' id='normal-dice' aria-label='Dice Pool'
-                style='max-width: 80px;' [(ngModel)]='dice'>
-        </div>
 
-        <!--error if less than one die indicated in pool-->
-        <div *ngIf='tooFewDiceFlag' class='alert alert-danger'>
-            <span>You must roll at least one die</span>
-        </div>
-
-        <!--input for current number of hunger dice-->
-        <div class='input-group'>
-            <div class="input-group-prepend">
-                <span class="input-group-text red">Hunger</span>
+            <!--error if less than one die indicated in pool-->
+            <div *ngIf='tooFewDiceFlag' class='alert alert-danger'>
+                <span>You must roll at least one die</span>
             </div>
-            <input type='number' min='0' max='5' class='form-control' id='hunger-dice' style='max-width: 80px;'
-                [(ngModel)]='hunger'>
-        </div>
 
-        <!--error if less than zero hunger indicated-->
-        <div *ngIf='tooFewHungerFlag' class='alert alert-danger'>
-            <span>You must have at least zero hunger</span>
-        </div>
-        <!--error if more than 5 hunger indicated-->
-        <div *ngIf='tooManyHungerFlag' class='alert alert-danger'>
-            <span>You can only have a maximum of five hunger</span>
-        </div>
-
-        <!--input for current difficulty, if known (can be left blank)-->
-        <div class='input-group' style='margin-bottom: 0px;'>
-            <div class="input-group-prepend">
-                <span class="input-group-text">Difficulty</span>
+            <!--input for current number of hunger dice-->
+            <div class='input-group'>
+                <div class="input-group-prepend">
+                    <span class="input-group-text red">Hunger</span>
+                </div>
+                <input type='number' min='0' max='5' class='form-control' id='hunger-dice' style='max-width: 80px;'
+                    [(ngModel)]='hunger'>
             </div>
-            <input type='number' min='1' max='20' class='form-control' id='difficulty-input' style='max-width: 80px;'
-                [(ngModel)]='difficulty'>
-        </div>
-        <small class='form-text text-muted' style='margin-bottom: 10px; margin-top:0px;'>
-            Leave blank if difficulty is unknown
-        </small>
 
-        <!--error if difficulty less than 1 indicated-->
-        <div *ngIf='difficultyTooLowFlag' class='alert alert-danger'>
-            <span>Difficulty must be at least 1</span>
+            <!--error if less than zero hunger indicated-->
+            <div *ngIf='tooFewHungerFlag' class='alert alert-danger'>
+                <span>You must have at least zero hunger</span>
+            </div>
+            <!--error if more than 5 hunger indicated-->
+            <div *ngIf='tooManyHungerFlag' class='alert alert-danger'>
+                <span>You can only have a maximum of five hunger</span>
+            </div>
+
+            <!--input for current difficulty, if known (can be left blank)-->
+            <div class='input-group' style='margin-bottom: 0px;'>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Difficulty</span>
+                </div>
+                <input type='number' min='1' max='20' class='form-control' id='difficulty-input' style='max-width: 80px;'
+                    [(ngModel)]='difficulty'>
+            </div>
+            <small class='form-text text-muted' style='margin-bottom: 10px; margin-top:0px;'>
+                Leave blank if difficulty is unknown
+            </small>
+
+            <!--error if difficulty less than 1 indicated-->
+            <div *ngIf='difficultyTooLowFlag' class='alert alert-danger'>
+                <span>Difficulty must be at least 1</span>
+            </div>
+
+            <!--button to begin a fresh roll using input values-->
+            <button (click)='validate()' type='button' class='btn btn-dark btn-lg'>Roll</button>
         </div>
 
-        <!--button to begin a fresh roll using input values-->
-        <button (click)='validate()' type='button' class='btn btn-dark btn-lg'>Roll</button>
+        <!-- Rouse checker -->
+        <div class="col-6">
+            <h3>Rouse Check</h3>
+            <button (click)='rouseCheck()' type='button' class='btn btn-dark btn-lg'>Roll</button>
+            <div *ngIf="rouseText">{{rouseText}}</div>
+            <img *ngIf="rouseImg" src='{{rouseImg}}'/>
+        </div>
+        </div>
     </div>
 
     <!--results div-->
@@ -98,6 +112,7 @@
                 <h4>Bestial failure</h4>
             </div>
         </div>
+        
 
         <!--result images-->
         <div class='row' style='margin-bottom: 10px;'>

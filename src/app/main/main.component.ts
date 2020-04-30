@@ -160,7 +160,7 @@ export class MainComponent {
         }
         //success
         else {
-            this.rouseImg = 'assets/images/normal-success.png';
+            this.rouseImg = 'assets/images/red-success.png';
             this.rouseText = 'Success';
         }
     }
