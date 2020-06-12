@@ -66,6 +66,9 @@
         <div class="col-6">
             <h3>Rouse Check</h3>
             <button (click)='rouseCheck()' type='button' class='btn btn-dark btn-lg'>Roll</button>
+            <!-- Reset the rouse check to blank -->
+            &nbsp;
+            <button (click)="resetRouse()" type="button" class='btn btn-light btn-lg'>Reset</button>
             <div *ngIf="rouseText">{{rouseText}}</div>
             <img *ngIf="rouseImg" src='{{rouseImg}}'/>
         </div>

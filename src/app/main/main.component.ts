@@ -177,6 +177,11 @@ export class MainComponent {
         }
     }
 
+    resetRouse(): void {
+        this.rouseImg = "";
+        this.rouseText = "";
+    }
+
     /**
      * main function, fully rolls dice arrays and calculates successes/image results
      */
